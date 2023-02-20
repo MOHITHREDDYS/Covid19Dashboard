@@ -11,6 +11,8 @@ import ConfirmedIcon from '../ConfirmedIcon'
 import ActiveIcon from '../ActiveIcon'
 import RecoveredIcon from '../RecoveredIcon'
 import DeceasedIcon from '../DeceasedIcon'
+import StateWiseTable from '../StateWiseTable'
+import Footer from '../Footer'
 
 const statesList = [
   {
@@ -260,6 +262,7 @@ class Home extends Component {
       totalConfirmed,
       totalDeceased,
       totalRecovered,
+      stateDetailsList,
     } = this.state
     return (
       <div className="home-container">
@@ -295,6 +298,8 @@ class Home extends Component {
             <p className="tabs-total-count deceased">{totalDeceased}</p>
           </div>
         </div>
+        <StateWiseTable stateDetailsList={stateDetailsList} />
+        <Footer />
       </div>
     )
   }
@@ -312,13 +317,6 @@ class Home extends Component {
   }
 
   render() {
-    const {
-      totalActive,
-      totalConfirmed,
-      totalDeceased,
-      totalRecovered,
-    } = this.state
-
     return (
       <Covid19Context.Consumer>
         {value => {

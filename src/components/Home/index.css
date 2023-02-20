@@ -135,7 +135,7 @@
   .tab-container {
     padding-top: 48px;
     padding-bottom: 42px;
-    width: 264px;
+    max-width: 264px;
     height: 232px;
   }
   .tabs-heading {
