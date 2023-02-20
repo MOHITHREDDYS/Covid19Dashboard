@@ -11,6 +11,13 @@
   align-items: center;
 }
 
+.spinner-container {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .home-container {
   width: 100%;
   display: flex;
@@ -56,6 +63,63 @@
   outline: none;
 }
 
+/* /////////////////////////tabs-container/////////////////////////////////////////////////////////////////// */
+.home-tabs-container {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  margin-top: 30px;
+  padding-left: 24px;
+  padding-right: 24px;
+}
+.tab-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 50%;
+  max-width: 200px;
+  min-width: 132px;
+  padding-top: 26px;
+  padding-bottom: 26px;
+}
+
+.tabs-heading {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 16px;
+  text-align: center;
+  margin-bottom: 16px;
+}
+
+.tabs-heading-1 {
+  margin-bottom: 0px;
+}
+
+.tabs-total-count {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 24px;
+  margin-top: 16px;
+}
+
+.confirmed {
+  color: #ff073a;
+}
+.active {
+  color: #007bff;
+}
+.recovered {
+  color: #28a745;
+}
+.deceased {
+  color: #6c757d;
+}
 @media screen and (min-width: 768px) {
   .search-container {
     padding: 24px 32px;
@@ -67,5 +131,21 @@
   .search-input {
     font-size: 16px;
     line-height: 24px;
+  }
+  .tab-container {
+    padding-top: 48px;
+    padding-bottom: 42px;
+    width: 264px;
+    height: 232px;
+  }
+  .tabs-heading {
+    font-size: 16px;
+    line-height: 24px;
+    margin-bottom: 24px;
+  }
+  .tabs-total-count {
+    font-size: 24px;
+    line-height: 24px;
+    margin-top: 32px;
   }
 }

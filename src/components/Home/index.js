@@ -1,4 +1,5 @@
 import {Component} from 'react'
+import Loader from 'react-loader-spinner'
 
 import {BsSearch} from 'react-icons/bs'
 
@@ -6,6 +7,10 @@ import Header from '../Header'
 
 import './index.css'
 import Covid19Context from '../../context/Covid19Context'
+import ConfirmedIcon from '../ConfirmedIcon'
+import ActiveIcon from '../ActiveIcon'
+import RecoveredIcon from '../RecoveredIcon'
+import DeceasedIcon from '../DeceasedIcon'
 
 const statesList = [
   {
@@ -163,6 +168,7 @@ const apiStatusList = {
 class Home extends Component {
   state = {
     apiStatus: apiStatusList.initial,
+    stateDetailsList: [],
     totalConfirmed: 0,
     totalActive: 0,
     totalRecovered: 0,
@@ -174,7 +180,7 @@ class Home extends Component {
   }
 
   getAllDetails = async () => {
-    this.setState({apiStatus: apiStatusList.loading, stateDetailsList: []})
+    this.setState({apiStatus: apiStatusList.loading})
 
     const url = 'https://apis.ccbp.in/covid19-state-wise-data'
 
@@ -233,6 +239,66 @@ class Home extends Component {
     return resultList
   }
 
+  getLoadingView = () => (
+    <div data-testid="loader" className="spinner-container">
+      <Loader
+        type="TailSpin"
+        color="#007bff"
+        height="60"
+        width="60"
+        ariaLabel="tail-spin-loading"
+        wrapperStyle={{}}
+        wrapperClass="blocks-wrapper"
+        radius={0}
+      />
+    </div>
+  )
+
+  getSuccessView = () => {
+    const {
+      totalActive,
+      totalConfirmed,
+      totalDeceased,
+      totalRecovered,
+    } = this.state
+    return (
+      <div className="home-container">
+        <div className="search-bg-container">
+          <div className="search-container">
+            <BsSearch className="search-icon" />
+            <input
+              type="text"
+              placeholder="Enter the State"
+              className="search-input"
+            />
+          </div>
+        </div>
+        <div className="home-tabs-container">
+          <div className="tab-container">
+            <p className="tabs-heading confirmed">Confirmed</p>
+            <ConfirmedIcon />
+            <p className="tabs-total-count confirmed">{totalConfirmed}</p>
+          </div>
+          <div className="tab-container">
+            <p className="tabs-heading active">Active</p>
+            <ActiveIcon />
+            <p className="tabs-total-count active">{totalActive}</p>
+          </div>
+          <div className="tab-container">
+            <p className="tabs-heading recovered">Recovered</p>
+            <RecoveredIcon />
+            <p className="tabs-total-count recovered">{totalRecovered}</p>
+          </div>
+          <div className="tab-container">
+            <p className="tabs-heading deceased">Deceased</p>
+            <DeceasedIcon />
+            <p className="tabs-total-count deceased">{totalDeceased}</p>
+          </div>
+        </div>
+      </div>
+    )
+  }
+
   getDesiredView = () => {
     const {apiStatus} = this.state
     switch (apiStatus) {
@@ -254,22 +320,18 @@ class Home extends Component {
     } = this.state
 
     return (
-      <div className="home-bg-container">
-        <Header />
-        <div className="home-container">
-          <div className="search-bg-container">
-            <div className="search-container">
-              <BsSearch className="search-icon" />
-              <input
-                type="text"
-                placeholder="Enter the State"
-                className="search-input"
-              />
+      <Covid19Context.Consumer>
+        {value => {
+          const {showHamburgerItems} = value
+
+          return (
+            <div className="home-bg-container">
+              <Header />
+              {!showHamburgerItems && this.getDesiredView()}
             </div>
-          </div>
-          {this.getDesiredView()}
-        </div>
-      </div>
+          )
+        }}
+      </Covid19Context.Consumer>
     )
   }
 }
