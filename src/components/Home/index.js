@@ -241,6 +241,40 @@ class Home extends Component {
     return resultList
   }
 
+  compare = (a, b) => {
+    if (a.name < b.name) {
+      return -1
+    }
+    if (a.name > b.name) {
+      return 1
+    }
+    return 0
+  }
+
+  comparing = (a, b) => {
+    if (a.name < b.name) {
+      return 1
+    }
+    if (a.name > b.name) {
+      return -1
+    }
+    return 0
+  }
+
+  ascendingOrder = () => {
+    const {stateDetailsList} = this.state
+
+    const orderedList = stateDetailsList.sort(this.compare)
+    this.setState({stateDetailsList: orderedList})
+  }
+
+  descendingOrder = () => {
+    const {stateDetailsList} = this.state
+
+    const orderedList = stateDetailsList.sort(this.comparing)
+    this.setState({stateDetailsList: orderedList})
+  }
+
   getLoadingView = () => (
     <div data-testid="loader" className="spinner-container">
       <Loader
@@ -298,7 +332,11 @@ class Home extends Component {
             <p className="tabs-total-count deceased">{totalDeceased}</p>
           </div>
         </div>
-        <StateWiseTable stateDetailsList={stateDetailsList} />
+        <StateWiseTable
+          stateDetailsList={stateDetailsList}
+          ascendingOrder={this.ascendingOrder}
+          descendingOrder={this.descendingOrder}
+        />
         <Footer />
       </div>
     )
