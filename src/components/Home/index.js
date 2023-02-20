@@ -2,6 +2,7 @@ import {Component} from 'react'
 import Loader from 'react-loader-spinner'
 
 import {BsSearch} from 'react-icons/bs'
+import {BiChevronRightSquare} from 'react-icons/bi'
 
 import Header from '../Header'
 
@@ -175,6 +176,7 @@ class Home extends Component {
     totalActive: 0,
     totalRecovered: 0,
     totalDeceased: 0,
+    searchInput: '',
   }
 
   componentDidMount() {
@@ -290,6 +292,11 @@ class Home extends Component {
     </div>
   )
 
+  onChangingInput = event => {
+    console.log(event.target.value)
+    this.setState({searchInput: event.target.value})
+  }
+
   getSuccessView = () => {
     const {
       totalActive,
@@ -297,7 +304,24 @@ class Home extends Component {
       totalDeceased,
       totalRecovered,
       stateDetailsList,
+      searchInput,
     } = this.state
+
+    let searchList = []
+
+    if (searchInput !== '') {
+      console.log('search : ', searchInput)
+      const filterValue = searchInput.toLowerCase()
+
+      searchList = stateDetailsList.filter(state => {
+        const stateName = state.name.toLowerCase()
+        if (stateName.includes(filterValue)) {
+          return state
+        }
+        return null
+      })
+    }
+
     return (
       <div className="home-container">
         <div className="search-bg-container">
@@ -307,37 +331,58 @@ class Home extends Component {
               type="text"
               placeholder="Enter the State"
               className="search-input"
+              value={searchInput}
+              onChange={this.onChangingInput}
             />
           </div>
         </div>
-        <div className="home-tabs-container">
-          <div className="tab-container">
-            <p className="tabs-heading confirmed">Confirmed</p>
-            <ConfirmedIcon />
-            <p className="tabs-total-count confirmed">{totalConfirmed}</p>
-          </div>
-          <div className="tab-container">
-            <p className="tabs-heading active">Active</p>
-            <ActiveIcon />
-            <p className="tabs-total-count active">{totalActive}</p>
-          </div>
-          <div className="tab-container">
-            <p className="tabs-heading recovered">Recovered</p>
-            <RecoveredIcon />
-            <p className="tabs-total-count recovered">{totalRecovered}</p>
-          </div>
-          <div className="tab-container">
-            <p className="tabs-heading deceased">Deceased</p>
-            <DeceasedIcon />
-            <p className="tabs-total-count deceased">{totalDeceased}</p>
-          </div>
-        </div>
-        <StateWiseTable
-          stateDetailsList={stateDetailsList}
-          ascendingOrder={this.ascendingOrder}
-          descendingOrder={this.descendingOrder}
-        />
-        <Footer />
+
+        {searchInput !== '' && (
+          <ul className="search-list">
+            {searchList.map(state => (
+              <li className="search-item" key={state.stateCode}>
+                <p className="search-name">{state.name}</p>
+                <div className="code-icon-container">
+                  <p className="search-code">{state.stateCode}</p>
+                  <BiChevronRightSquare className="chevron-icon" />
+                </div>
+              </li>
+            ))}
+          </ul>
+        )}
+
+        {searchInput === '' && (
+          <>
+            <div className="home-tabs-container">
+              <div className="tab-container">
+                <p className="tabs-heading confirmed">Confirmed</p>
+                <ConfirmedIcon />
+                <p className="tabs-total-count confirmed">{totalConfirmed}</p>
+              </div>
+              <div className="tab-container">
+                <p className="tabs-heading active">Active</p>
+                <ActiveIcon />
+                <p className="tabs-total-count active">{totalActive}</p>
+              </div>
+              <div className="tab-container">
+                <p className="tabs-heading recovered">Recovered</p>
+                <RecoveredIcon />
+                <p className="tabs-total-count recovered">{totalRecovered}</p>
+              </div>
+              <div className="tab-container">
+                <p className="tabs-heading deceased">Deceased</p>
+                <DeceasedIcon />
+                <p className="tabs-total-count deceased">{totalDeceased}</p>
+              </div>
+            </div>
+            <StateWiseTable
+              stateDetailsList={stateDetailsList}
+              ascendingOrder={this.ascendingOrder}
+              descendingOrder={this.descendingOrder}
+            />
+            <Footer />
+          </>
+        )}
       </div>
     )
   }

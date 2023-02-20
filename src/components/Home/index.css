@@ -64,6 +64,65 @@
   outline: none;
 }
 
+.search-list {
+  list-style-type: none;
+  padding-left: 0px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.search-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex: 1;
+  max-width: 900px;
+  margin-left: 24px;
+  margin-right: 24px;
+  padding: 16px 14px;
+  border-bottom: 0.3px solid #64748b;
+}
+
+.search-list li:hover {
+  border: 1px solid #94a3b8;
+}
+
+.search-name {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+  color: #64748b;
+}
+
+.code-icon-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(28, 212, 212, 0.16);
+  border-radius: 4px;
+  padding: 4px 8px;
+  margin-left: 15px;
+}
+
+.search-code {
+  font-family: 'HK Grotesk';
+  font-style: normal;
+  font-weight: 600;
+  font-size: 12px;
+  line-height: 16px;
+  color: #facc15;
+  margin-right: 10px;
+}
+
+.chevron-icon {
+  color: #facc15;
+  width: 20px;
+  height: 20px;
+}
+
 /* /////////////////////////tabs-container/////////////////////////////////////////////////////////////////// */
 .home-tabs-container {
   width: 100%;
@@ -148,5 +207,9 @@
     font-size: 24px;
     line-height: 24px;
     margin-top: 32px;
+  }
+  .search-code {
+    font-size: 16px;
+    line-height: 24px;
   }
 }
