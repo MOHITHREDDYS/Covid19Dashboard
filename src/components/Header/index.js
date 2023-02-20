@@ -6,11 +6,8 @@ import Covid19Context from '../../context/Covid19Context'
 import NavbarHamburger from '../NavbarHamburger'
 
 const Header = props => {
-  console.log('Header')
-
   const {match} = props
   const {path} = match
-  console.log(path)
 
   return (
     <Covid19Context.Consumer>
@@ -25,9 +22,9 @@ const Header = props => {
           <>
             <nav className="navbar-bg-container">
               <div className="navbar-container">
-                <h1 className="header-heading">
+                <Link to="/" className="header-heading">
                   COVID19<span className="header-span-heading">INDIA</span>
-                </h1>
+                </Link>
                 <button
                   type="button"
                   className="hamburger-button"

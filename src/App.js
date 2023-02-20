@@ -171,16 +171,12 @@ class App extends Component {
         value={{
           showHamburgerItems,
           toggleHamburgerItems: this.toggleHamburgerItems,
+          statesList,
         }}
       >
         <Switch>
-          <Route exact path="/" component={Home} statesList={statesList} />
-          <Route
-            exact
-            path="/about"
-            component={About}
-            statesList={statesList}
-          />
+          <Route exact path="/" component={Home} />
+          <Route exact path="/about" component={About} />
         </Switch>
       </Covid19Context.Provider>
     )

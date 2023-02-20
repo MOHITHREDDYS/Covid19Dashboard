@@ -33,3 +33,9 @@
   color: #f8fafc;
   font-weight: 500;
 }
+
+@media screen and (min-width: 768px) {
+  .ham-items-bg-container {
+    display: none;
+  }
+}
