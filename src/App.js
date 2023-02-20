@@ -2,6 +2,7 @@ import {Switch, Route} from 'react-router-dom'
 import {Component} from 'react'
 
 import Home from './components/Home'
+import About from './components/About'
 
 import Covid19Context from './context/Covid19Context'
 
@@ -157,12 +158,29 @@ const statesList = [
 class App extends Component {
   state = {showHamburgerItems: false}
 
+  toggleHamburgerItems = () => {
+    this.setState(prevState => ({
+      showHamburgerItems: !prevState.showHamburgerItems,
+    }))
+  }
+
   render() {
     const {showHamburgerItems} = this.state
     return (
-      <Covid19Context.Provider value={{showHamburgerItems}}>
+      <Covid19Context.Provider
+        value={{
+          showHamburgerItems,
+          toggleHamburgerItems: this.toggleHamburgerItems,
+        }}
+      >
         <Switch>
           <Route exact path="/" component={Home} statesList={statesList} />
+          <Route
+            exact
+            path="/about"
+            component={About}
+            statesList={statesList}
+          />
         </Switch>
       </Covid19Context.Provider>
     )

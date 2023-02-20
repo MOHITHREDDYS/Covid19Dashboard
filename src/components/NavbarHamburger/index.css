@@ -1,0 +1,35 @@
+.ham-items-bg-container {
+  display: flex;
+  justify-content: center;
+}
+
+.ham-items-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex: 1;
+  padding: 24px 24px;
+  max-width: 1248px;
+}
+
+.hamburger-item {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 26px;
+  color: #94a3b8;
+  text-decoration: none;
+  padding-right: 24px;
+}
+.close-icon-button {
+  background-color: transparent;
+  border: none;
+  padding: 0px;
+  cursor: pointer;
+}
+
+.active-route-color {
+  color: #f8fafc;
+  font-weight: 500;
+}

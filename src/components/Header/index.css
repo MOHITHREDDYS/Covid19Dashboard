@@ -1,8 +1,11 @@
 .navbar-bg-container {
   background-color: #1e1e30;
+  display: flex;
+  justify-content: center;
 }
 
 .navbar-container {
+  flex: 1;
   padding: 16px 24px;
   max-width: 1248px;
   display: flex;
@@ -26,14 +29,38 @@
   padding: 0px;
   border: none;
   background-color: transparent;
+  cursor: pointer;
+}
+
+.nav-items-container {
+  display: none;
+}
+.nav-items {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-size: 16px;
+  line-height: 24px;
+  text-decoration: none;
+  padding-left: 48px;
+  color: #94a3b8;
+}
+.active-route-color {
+  color: #f8fafc;
+  font-weight: 500;
 }
 
 @media screen and (min-width: 768px) {
+  .navbar-container {
+    padding: 28px 24px;
+  }
   .header-heading {
     font-size: 20px;
     line-height: 24px;
   }
-  .hamburger-icon {
+  .hamburger-button {
     display: none;
+  }
+  .nav-items-container {
+    display: flex;
   }
 }
